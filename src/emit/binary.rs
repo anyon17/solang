@@ -170,13 +170,14 @@ impl<'a> Binary<'a> {
         opt: &'a Options,
     ) -> Self {
         let std_lib = load_stdlib(context, &ns.target);
-        match ns.target {
+        let binary = match ns.target {
             Target::Polkadot { .. } => {
                 polkadot::PolkadotTarget::build(context, &std_lib, contract, ns, opt)
             }
             Target::Solana => solana::SolanaTarget::build(context, &std_lib, contract, ns, opt),
             Target::EVM => unimplemented!(),
-        }
+        };
+        binary
     }
 
     /// Compile the bin and return the code as bytes. The result is
