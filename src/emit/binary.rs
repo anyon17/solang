@@ -177,6 +177,9 @@ impl<'a> Binary<'a> {
             Target::Solana => solana::SolanaTarget::build(context, &std_lib, contract, ns, opt),
             Target::EVM => unimplemented!(),
         };
+
+        binary.module.print_to_file("out.ll").unwrap();
+
         binary
     }
 
